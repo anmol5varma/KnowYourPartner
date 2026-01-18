@@ -1,11 +1,11 @@
 
 import React, { useEffect, useCallback } from 'react';
-import Layout from './components/Layout';
-import Progress from './components/Progress';
-import QuestionCard from './components/QuestionCard';
-import TransitionScreen from './components/TransitionScreen';
-import Summary from './components/Summary';
-import { useQuestionnaire } from './hooks/useQuestionnaire';
+import Layout from './components/Layout.tsx';
+import Progress from './components/Progress.tsx';
+import QuestionCard from './components/QuestionCard.tsx';
+import TransitionScreen from './components/TransitionScreen.tsx';
+import Summary from './components/Summary.tsx';
+import { useQuestionnaire } from './hooks/useQuestionnaire.ts';
 
 const App: React.FC = () => {
   const {

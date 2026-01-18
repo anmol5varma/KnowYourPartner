@@ -13,12 +13,12 @@
       body {
         font-family: 'Inter', sans-serif;
         background-color: #fafafa;
-        overflow: hidden;
+        margin: 0;
+        padding: 0;
       }
       .font-serif {
         font-family: 'Playfair Display', serif;
       }
-      /* Custom focus outline */
       *:focus {
         outline: none;
       }
@@ -29,19 +29,32 @@
         background: #e2e8f0;
         border-radius: 10px;
       }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.17?external=react,react-dom",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "framer-motion": "https://esm.sh/framer-motion@^12.27.0"
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>

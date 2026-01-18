@@ -18,11 +18,13 @@ const App: React.FC = () => {
     goToNext,
     goToPrev,
     autoAdvance,
-    reset
+    reset,
+    isLoaded
   } = useQuestionnaire();
 
   // Keyboard Navigation
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (!currentStep) return;
     if (e.target instanceof HTMLInputElement) {
       if (e.key === 'Enter') {
          goToNext();
@@ -73,6 +75,14 @@ const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  if (!isLoaded || !currentStep) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-stone-50">
+        <div className="w-8 h-8 border-4 border-stone-200 border-t-stone-800 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   const renderStep = () => {
     switch (currentStep.type) {
       case 'intro':
@@ -111,9 +121,10 @@ const App: React.FC = () => {
   ) : true;
 
   const showNextAsPrimary = isQuestionStep ? hasValue : true;
+  const stepKey = isQuestionStep ? currentStep.question.id : currentStep.id;
 
   return (
-    <Layout stepKey={currentStep.type === 'question' ? currentStep.question.id : currentStep.id}>
+    <Layout stepKey={stepKey}>
       {currentStep.type !== 'summary' && (
         <Progress current={currentIndex} total={totalSteps - 1} />
       )}
@@ -122,7 +133,6 @@ const App: React.FC = () => {
         {renderStep()}
       </div>
 
-      {/* Modern Integrated Navigation Footer - Only shown for Questions to avoid overlap on Transition screens */}
       {isQuestionStep && (
         <div className="fixed bottom-0 left-0 w-full bg-white/60 backdrop-blur-md border-t border-stone-100 px-6 py-4 z-40">
           <div className="max-w-2xl mx-auto flex items-center justify-between">
